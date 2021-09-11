@@ -1,6 +1,8 @@
 #pragma once
 #include "Object.h"
 #include <vector>
+#include <memory>
+class Object;
 using std::vector;
 using std::shared_ptr;
 

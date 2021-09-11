@@ -1,17 +1,21 @@
 #pragma once
-#include "Common.h"
-#include "Vec3.h"
 #include <iostream>
+#include <fstream>
 #include <functional>
+#include "Vec3.h"
 using std::function;
 
 class Canvas
 {
 public:
-	void Render(const std::function<Color(uint32_t&, uint32_t&)>& func) const;
-	void WriteColor(Color pxColor, uint32_t pxSamples) const;
+	Canvas();
+	~Canvas();
+
+public:
+	void Render(const function<Color(uint32_t&, uint32_t&)>& func);
+	void WriteColor(Color pxColor, uint32_t pxSamples);
 
 private:
-	std::ostream& outPPM = std::cout;
+	std::ofstream outPPM;
 	std::ostream& outInfo = std::cerr;
 };

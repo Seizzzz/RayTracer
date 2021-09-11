@@ -1,4 +1,18 @@
 #include "Object.h"
+#include "Ray.h"
+#include <cmath>
+
+Object::Object() : m_pMtrl(nullptr)
+{
+	
+}
+
+Sphere::Sphere(Point3 center, double radius, shared_ptr<Material> mtrl) :
+	m_vCenter(center),
+	m_dRadius(radius)
+{
+	m_pMtrl = mtrl;
+}
 
 bool Sphere::Hit(const Ray& r, double t1, double t2, RecordHit& rcd) const
 {
@@ -18,8 +32,23 @@ bool Sphere::Hit(const Ray& r, double t1, double t2, RecordHit& rcd) const
 
 	rcd.Position = r.getDestination(root);
 	rcd.Normal = (rcd.Position - m_vCenter) / m_dRadius;
-	if (rcd.Normal * r.Direction() > 0.0) rcd.Normal = -rcd.Normal; //hit backface
+	if (rcd.Normal * r.Direction() > 0.0) //hit backface
+	{
+		rcd.Normal = -rcd.Normal;
+		rcd.bHitFront = false;
+	}
 	rcd.t = root;
+	rcd.pMtrl = m_pMtrl;
 	
     return true;
+}
+
+Vec3 Sphere::GenerateRandomInUnitSphere()
+{
+	Vec3 ret(0.0, 0.0, 0.0);
+	
+	do ret = Vec3::GenerateRandom(-1.0, 1.0);
+	while (ret.norm() > 1.0);
+	
+	return ret;
 }

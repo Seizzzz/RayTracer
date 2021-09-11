@@ -1,6 +1,17 @@
 #include "Canvas.h"
+#include "Common.h"
 
-void Canvas::Render(const std::function<Color(uint32_t&, uint32_t&)>& func) const
+Canvas::Canvas()
+{
+	outPPM.open(Common::g_PPMFileLocation);
+}
+
+Canvas::~Canvas()
+{
+	outPPM.close();
+}
+
+void Canvas::Render(const function<Color(uint32_t&, uint32_t&)>& func)
 {
 	outPPM << "P3\n" << Common::g_ImageWidth << ' ' << Common::g_ImageHeight << "\n255\n";
 	for (auto line = 0u; line < Common::g_ImageHeight; ++line)
@@ -19,10 +30,10 @@ void Canvas::Render(const std::function<Color(uint32_t&, uint32_t&)>& func) cons
 	}
 }
 
-void Canvas::WriteColor(Color pxColor, uint32_t pxSamples) const
+void Canvas::WriteColor(Color pxColor, uint32_t pxSamples)
 {
 	auto scale = 1.0 / pxSamples;
-	pxColor = scale * pxColor;
+	pxColor = (scale * pxColor).gamma();
 	
 	outPPM
 		<< static_cast<int>(256 * clamp(pxColor.x(), 0.0, 0.999)) << ' '

@@ -1,4 +1,6 @@
 #include "Camera.h"
+#include "Common.h"
+#include "Ray.h"
 
 Ray Camera::Beam(double u, double v) const
 {

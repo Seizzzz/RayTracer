@@ -1,6 +1,8 @@
 #pragma once
-#include <iostream>
-using std::ostream;
+class ostream;
+class Vec3;
+using Color = Vec3;
+using Point3 = Vec3;
 
 class Vec3
 {
@@ -22,6 +24,7 @@ public:
 	double operator*(const Vec3& otr) const;
 	Vec3 operator/(const Vec3& otr) const;
 	Vec3 operator/(const double& factor) const;
+	Vec3 operator&(const Vec3& otr) const;
 	friend Vec3 operator*(const double& factor, const Vec3& v);
 
 public:
@@ -30,6 +33,15 @@ public:
 	double norm() const;
 	Vec3 unit() const;
 	Vec3 lerp(const Vec3& otr, double t) const;
+
+public:
+	Color gamma() const;
+
+public:
+	bool IsBarely() const;
+
+public:
+	static Vec3 GenerateRandom(double min = 0.0, double max = 1.0);
 	
 public:
 	double x() const { return m_dvec[0]; }
@@ -45,6 +57,3 @@ public:
 private:
 	double m_dvec[3];
 };
-
-using Color = Vec3;
-using Point3 = Vec3;
