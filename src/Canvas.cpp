@@ -3,7 +3,7 @@
 
 Canvas::Canvas()
 {
-	outPPM.open(Common::g_PPMFileLocation);
+	outPPM.open(Common::g_PPMFilePath);
 }
 
 Canvas::~Canvas()

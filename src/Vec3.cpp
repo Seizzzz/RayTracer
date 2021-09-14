@@ -112,15 +112,18 @@ Vec3 Vec3::operator&(const Vec3& otr) const //°´Î»³Ë
 		m_dvec[2] * otr.m_dvec[2]);
 }
 
-inline Vec3& Vec3::dot(const Vec3& otr)
+inline double Vec3::dot(const Vec3& otr) const
 {
-	return operator*=(otr);
+	return operator*(otr);
 }
 
-Vec3& Vec3::cross(const Vec3& otr)
+Vec3 Vec3::cross(const Vec3& otr) const
 {
-	assert(0); //todo
-	return *this;
+	return Vec3(
+		m_dvec[1] * otr.m_dvec[2] - m_dvec[2] * otr.m_dvec[1],
+		m_dvec[2] * otr.m_dvec[0] - m_dvec[0] * otr.m_dvec[2],
+		m_dvec[0] * otr.m_dvec[1] - m_dvec[1] * otr.m_dvec[0]
+	);
 }
 
 inline double Vec3::norm() const

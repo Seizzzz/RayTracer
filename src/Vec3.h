@@ -28,8 +28,8 @@ public:
 	friend Vec3 operator*(const double& factor, const Vec3& v);
 
 public:
-	Vec3& dot(const Vec3& otr);
-	Vec3& cross(const Vec3& otr);
+	double dot(const Vec3& otr) const;
+	Vec3 cross(const Vec3& otr) const;
 	double norm() const;
 	Vec3 unit() const;
 	Vec3 lerp(const Vec3& otr, double t) const;

@@ -28,11 +28,22 @@ private:
 class MtrlMetal : public Material
 {
 public:
-	MtrlMetal(const Color& abd) : m_vAlbedo(abd) {}
+	MtrlMetal(const Color& abd, double fuzz = 0.0) : m_vAlbedo(abd), m_dFuzz(fuzz) {}
 
 public:
 	virtual bool Scatter(const Ray& r_in, const RecordHit& rcd, Color& attenuat, Ray& r_out) const override;
 
 private:
 	Color m_vAlbedo;
+	double m_dFuzz;
+};
+
+class MtrlDielectric : public Material
+{
+public:
+	MtrlDielectric(double eta) : m_dRefractRatio(eta) {}
+	virtual bool Scatter(const Ray& r_in, const RecordHit& rcd, Color& attenuat, Ray& r_out) const override;
+
+private:
+	double m_dRefractRatio;
 };

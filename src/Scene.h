@@ -13,6 +13,7 @@ public:
 	void AddObject(shared_ptr<Object> obj) { objects.push_back(obj); }
 	void ClearObjects() { objects.clear(); }
 	virtual bool Hit(const Ray& r, double t1, double t2, RecordHit& rec) const;
+	virtual void GenerateScene();
 	
 public:
 	vector<shared_ptr<Object>> objects;

@@ -10,14 +10,16 @@ public:
 	
 public:
 	Camera() = delete;
-	Camera(Point3 origin, Vec3 direction, Vec3 upward);
+	Camera(Point3 position, Vec3 target, Vec3 upward_world, double aperture = 2.0);
 
 private:
-	Point3 m_vOrigin;
-	Vec3 m_vDirection;
+	Point3 m_vPosition;
+	Vec3 m_vTargetPosition;
+	Vec3 m_vForwardInv;
+	Vec3 m_vRight;
 	Vec3 m_vUpward;
 	Vec3 m_vHorizion;
 	Vec3 m_vVertical;
 	Point3 m_vLeftDown;
-	
+	double m_dLensRadius;
 };
